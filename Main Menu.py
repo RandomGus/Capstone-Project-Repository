@@ -35,6 +35,9 @@ below_title_font = pygame.font.Font("freesansbold.ttf", 25)
 below_title_text = below_title_font.render("Press Enter to Continue", True, (255, 255, 255))
 below_title_coordinates = below_title_text.get_rect(center = (400, 325))
 
+# Here we will begin to write the code and make the necessary changes so that we can begin to display the level selection system.
+display_levels = False
+
 # Here is where the code for the game loop will be placed. 
 running = True
 while running:
@@ -60,9 +63,13 @@ while running:
                 print("The Return/Enter Button has been pressed.")
 
     # This will make it so that if the flag is True, the text will display. 
-    if display_main_menu:
+    if display_main_menu == True:
         screen.blit(title_text, title_coordinates)
         screen.blit(below_title_text, below_title_coordinates)
+
+    # This will make it so that when the flag for the level selection turns True, the levels will display.
+    if display_levels == True:
+        pass
 
     # This will make sure that the code is constantly being updated so that the image background can always be seen by the user. 
     pygame.display.update()
