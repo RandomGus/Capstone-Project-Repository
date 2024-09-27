@@ -47,6 +47,15 @@ level3_text_coordinates = level1_text.get_rect(center = (200, 400))
 level4_text = level_button_text_font.render("Level 04", True, (0, 0, 0))
 level4_text_coordinates = level1_text.get_rect(center = (600, 400))
 
+# Here we will write the code that will be used to assign a variable to each of the four rectangles. 
+# square1
+# square2
+# square3
+# square4
+
+# The following code will be used to get the position of the mouse.
+mouse_position = pygame.mouse.get_pos()
+
 # Here is where the code for the game loop will be placed. 
 running = True
 while running:
@@ -72,6 +81,14 @@ while running:
                 # The following print statement will be used to check whether or not the program is registering the button being pressed.
                 print("The Return/Enter Button has been pressed.")
 
+        # The following code should make it so that we can tell whether or not the mouse has been clicked in the program. 
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            print("The Mouse has been used.")
+            if pygame.mouse.get_pressed()[0]:
+                print("The Left Click of the Mouse has been pressed.")
+                # The following code will be used to test that the mouse movement is being registered in the program.
+                print(mouse_position)
+                
     # This will make it so that if the flag is True, the text will display. 
     if display_main_menu == True:
         screen.blit(title_text, title_coordinates)
