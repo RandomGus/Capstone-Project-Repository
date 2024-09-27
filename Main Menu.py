@@ -37,6 +37,15 @@ below_title_coordinates = below_title_text.get_rect(center = (400, 325))
 
 # Here we will begin to write the code and make the necessary changes so that we can begin to display the level selection system.
 display_levels = False
+level_button_text_font = pygame.font.Font("freesansbold.ttf", 20)
+level1_text = level_button_text_font.render("Level 01", True, (255, 255, 255))
+level1_text_coordinates = level1_text.get_rect(center = (200, 200))
+level2_text = level_button_text_font.render("Level 02", True, (255, 255, 255))
+level2_text_coordinates = level1_text.get_rect(center = (600, 200))
+level3_text = level_button_text_font.render("Level 03", True, (255, 255, 255))
+level3_text_coordinates = level1_text.get_rect(center = (200, 400))
+level4_text = level_button_text_font.render("Level 04", True, (255, 255, 255))
+level4_text_coordinates = level1_text.get_rect(center = (600, 400))
 
 # Here is where the code for the game loop will be placed. 
 running = True
@@ -59,6 +68,7 @@ while running:
             print("A Key has been pressed.")
             if event.key == pygame.K_RETURN:
                 display_main_menu = False
+                display_levels = True
                 # The following print statement will be used to check whether or not the program is registering the button being pressed.
                 print("The Return/Enter Button has been pressed.")
 
@@ -69,7 +79,10 @@ while running:
 
     # This will make it so that when the flag for the level selection turns True, the levels will display.
     if display_levels == True:
-        pass
+        screen.blit(level1_text, level1_text_coordinates)
+        screen.blit(level2_text, level2_text_coordinates)
+        screen.blit(level3_text, level3_text_coordinates)
+        screen.blit(level4_text, level4_text_coordinates)
 
     # This will make sure that the code is constantly being updated so that the image background can always be seen by the user. 
     pygame.display.update()
