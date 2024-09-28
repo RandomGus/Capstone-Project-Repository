@@ -48,10 +48,10 @@ level4_text = level_button_text_font.render("Level 04", True, (0, 0, 0))
 level4_text_coordinates = level1_text.get_rect(center = (600, 400))
 
 # Here we will write the code that will be used to assign a variable to each of the four rectangles. 
-# square1
-# square2
-# square3
-# square4
+level1_rectangle = pygame.Rect(100, 150, 200, 100)
+level2_rectangle = pygame.Rect(500, 150, 200, 100)
+level3_rectangle = pygame.Rect(100, 350, 200, 100)
+level4_rectangle = pygame.Rect(500, 350, 200, 100)
 
 
 # Here is where the code for the game loop will be placed. 
@@ -86,6 +86,16 @@ while running:
         if event.type == pygame.MOUSEBUTTONDOWN:
             print("The Mouse has been used.")
             if pygame.mouse.get_pressed()[0]:
+                # The following code should have collidepoint, which should make it so that the program will know if the player clicked on one of the buttons.
+                if level1_rectangle.collidepoint(mouse_position):
+                    print("Level 01 has been selected by the player.")
+                if level2_rectangle.collidepoint(mouse_position):
+                    print("Level 02 has been selected by the player.")
+                if level3_rectangle.collidepoint(mouse_position):
+                    print("Level 03 has been selected by the player.")
+                if level4_rectangle.collidepoint(mouse_position):
+                    print("Level 04 has been selected by the player.")
+                # The following code will be used to test that the left mouse click has been pressed.
                 print("The Left Click of the Mouse has been pressed.")
                 # The following code will be used to test that the mouse movement is being registered in the program.
                 print(mouse_position)
@@ -97,10 +107,10 @@ while running:
 
     # This will make it so that when the flag for the level selection turns True, the levels will display.
     if display_levels == True:
-        pygame.draw.rect(screen, (255, 255, 255), (100, 150, 200, 100))
-        pygame.draw.rect(screen, (255, 255, 255), (500, 150, 200, 100))
-        pygame.draw.rect(screen, (255, 255, 255), (100, 350, 200, 100))
-        pygame.draw.rect(screen, (255, 255, 255), (500, 350, 200, 100))
+        pygame.draw.rect(screen, (255, 255, 255), level1_rectangle)
+        pygame.draw.rect(screen, (255, 255, 255), level2_rectangle)
+        pygame.draw.rect(screen, (255, 255, 255), level3_rectangle)
+        pygame.draw.rect(screen, (255, 255, 255), level4_rectangle)
         screen.blit(level1_text, level1_text_coordinates)
         screen.blit(level2_text, level2_text_coordinates)
         screen.blit(level3_text, level3_text_coordinates)
