@@ -53,8 +53,6 @@ level4_text_coordinates = level1_text.get_rect(center = (600, 400))
 # square3
 # square4
 
-# The following code will be used to get the position of the mouse.
-mouse_position = pygame.mouse.get_pos()
 
 # Here is where the code for the game loop will be placed. 
 running = True
@@ -64,6 +62,9 @@ while running:
     # Moreover, I am making it so that the image begins to generate from the top-left corner.
     screen.fill((0, 0, 0))
     screen.blit(background, (0, 0))
+
+    # The following code will be used to get the position of the mouse.
+    mouse_position = pygame.mouse.get_pos()
 
     for event in pygame.event.get():
         # This will make it so that if the user clicks on the "X" of the window, the program will end.
