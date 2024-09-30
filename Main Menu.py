@@ -28,7 +28,7 @@ pygame.display.set_icon(icon)
 # Here we will begin to write the code that is related to the displaying of the title.
 # This should also showcase the text of "Press Enter to Start".
 display_main_menu = True
-main_menu_font = pygame.font.Font("freesansbold.ttf", 75)
+main_menu_font = pygame.font.Font("Source_Code_Pro\static\SourceCodePro-Bold.ttf", 70)
 title_text = main_menu_font.render("Cyber Defenders", True, (255, 255, 255))
 title_coordinates = title_text.get_rect(center = (400, 250))
 below_title_font = pygame.font.Font("freesansbold.ttf", 25)
