@@ -28,7 +28,7 @@ pygame.display.set_icon(icon)
 # Here we will begin to write the code that is related to the displaying of the title.
 # This should also showcase the text of "Press Enter to Start".
 display_main_menu = True
-main_menu_font = pygame.font.Font("freesansbold.ttf", 75)
+main_menu_font = pygame.font.Font("Source_Code_Pro\static\SourceCodePro-Bold.ttf", 70)
 title_text = main_menu_font.render("Cyber Defenders", True, (255, 255, 255))
 title_coordinates = title_text.get_rect(center = (400, 250))
 below_title_font = pygame.font.Font("freesansbold.ttf", 25)
@@ -46,6 +46,7 @@ level3_text = level_button_text_font.render("Level 03", True, (0, 0, 0))
 level3_text_coordinates = level1_text.get_rect(center = (200, 400))
 level4_text = level_button_text_font.render("Level 04", True, (0, 0, 0))
 level4_text_coordinates = level1_text.get_rect(center = (600, 400))
+settings_button = pygame.image.load("Icons_or_Images\setting.png")
 
 # Here we will write the code that will be used to assign a variable to each of the four rectangles. 
 level1_rectangle = pygame.Rect(100, 150, 200, 100)
@@ -115,6 +116,7 @@ while running:
         screen.blit(level2_text, level2_text_coordinates)
         screen.blit(level3_text, level3_text_coordinates)
         screen.blit(level4_text, level4_text_coordinates)
+        screen.blit(settings_button, (725, 25))
 
     # This will make sure that the code is constantly being updated so that the image background can always be seen by the user. 
     pygame.display.update()
