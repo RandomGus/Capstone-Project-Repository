@@ -48,11 +48,12 @@ level4_text = level_button_text_font.render("Level 04", True, (0, 0, 0))
 level4_text_coordinates = level1_text.get_rect(center = (600, 400))
 settings_button = pygame.image.load("Icons_or_Images\setting.png")
 
-# Here we will write the code that will be used to assign a variable to each of the four rectangles. 
+# Here we will write the code that will be used to assign a variable to each of the rectangles. 
 level1_rectangle = pygame.Rect(100, 150, 200, 100)
 level2_rectangle = pygame.Rect(500, 150, 200, 100)
 level3_rectangle = pygame.Rect(100, 350, 200, 100)
 level4_rectangle = pygame.Rect(500, 350, 200, 100)
+settings_button_rectangle = pygame.Rect(725, 25, 64, 64)
 
 
 # Here is where the code for the game loop will be placed. 
@@ -96,6 +97,8 @@ while running:
                     print("Level 03 has been selected by the player.")
                 if level4_rectangle.collidepoint(mouse_position) & display_levels == True:
                     print("Level 04 has been selected by the player.")
+                if settings_button_rectangle.collidepoint(mouse_position) & display_levels == True:
+                    print("Settings Button has been clicked.")
                 # The following code will be used to test that the left mouse click has been pressed.
                 print("The Left Click of the Mouse has been pressed.")
                 # The following code will be used to test that the mouse movement is being registered in the program.
