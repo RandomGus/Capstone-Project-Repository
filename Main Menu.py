@@ -55,6 +55,10 @@ level3_rectangle = pygame.Rect(100, 350, 200, 100)
 level4_rectangle = pygame.Rect(500, 350, 200, 100)
 settings_button_rectangle = pygame.Rect(725, 25, 64, 64)
 
+# Here we will define the function that will be responsible for the clicking noise that will be used for the game. 
+click = pygame.mixer.Sound('Game_Noises\Mouse Click Sound Effect.wav')
+def clicking_noise():
+    click.play(1)
 
 # Here is where the code for the game loop will be placed. 
 running = True
@@ -86,6 +90,7 @@ while running:
 
         # The following code should make it so that we can tell whether or not the mouse has been clicked in the program. 
         if event.type == pygame.MOUSEBUTTONDOWN:
+            clicking_noise()
             print("The Mouse has been used.")
             if pygame.mouse.get_pressed()[0]:
                 # The following code should have collidepoint, which should make it so that the program will know if the player clicked on one of the buttons.
