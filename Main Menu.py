@@ -58,7 +58,7 @@ settings_button_rectangle = pygame.Rect(725, 25, 64, 64)
 # Here we will define the function that will be responsible for the clicking noise that will be used for the game. 
 click = pygame.mixer.Sound('Game_Noises\Mouse Click Sound Effect.wav')
 def clicking_noise():
-    click.play(1)
+    click.play()
 
 # Here is where the code for the game loop will be placed. 
 running = True
