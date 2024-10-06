@@ -94,13 +94,13 @@ while running:
             print("The Mouse has been used.")
             if pygame.mouse.get_pressed()[0]:
                 # The following code should have collidepoint, which should make it so that the program will know if the player clicked on one of the buttons.
-                if level1_rectangle.collidepoint(mouse_position) & display_levels == True:
+                if level1_rectangle.collidepoint(mouse_position) and display_levels == True:
                     print("Level 01 has been selected by the player.")
-                if level2_rectangle.collidepoint(mouse_position) & display_levels == True:
+                if level2_rectangle.collidepoint(mouse_position) and display_levels == True:
                     print("Level 02 has been selected by the player.")
-                if level3_rectangle.collidepoint(mouse_position) & display_levels == True:
+                if level3_rectangle.collidepoint(mouse_position) and display_levels == True:
                     print("Level 03 has been selected by the player.")
-                if level4_rectangle.collidepoint(mouse_position) & display_levels == True:
+                if level4_rectangle.collidepoint(mouse_position) and display_levels == True:
                     print("Level 04 has been selected by the player.")
                 if settings_button_rectangle.collidepoint(mouse_position) & display_levels == True:
                     print("Settings Button has been clicked.")
