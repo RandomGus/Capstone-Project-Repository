@@ -72,6 +72,9 @@ display_settings = False
 
 settings_background_rectangle = pygame.Rect(0, 100, 800, 400)
 
+exit_settings_button_rectangle = pygame.Rect(725, 25, 64, 64)
+exit_settings_button = pygame.image.load("Icons_or_Images/cancel.png")
+
 running = True
 while running:
     screen.fill((0, 0, 0))
@@ -103,7 +106,12 @@ while running:
                     print("Level 04 has been selected by the player.")
                 if settings_button_rectangle.collidepoint(mouse_position) and display_levels:
                     display_settings = True
+                    display_levels = False
                     print("Settings Button has been clicked.")
+                if exit_settings_button_rectangle.collidepoint(mouse_position) and display_settings == True:
+                    display_settings = False
+                    display_levels = True
+                    print("Exit Settings Button has been clicked.")
                 print("The Left Click of the Mouse has been pressed.")
                 print(mouse_position)
 
@@ -140,6 +148,8 @@ while running:
     if display_settings:
         display_levels = False
         pygame.draw.rect(screen, (0, 0, 0), settings_background_rectangle)
+
+        screen.blit(exit_settings_button, (725, 25))
         pass
 
     pygame.display.update()
