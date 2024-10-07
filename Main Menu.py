@@ -70,9 +70,17 @@ def draw_rounded_rect(surface, color, rect, radius=20):
 # Here we will begin to define the necessary code for the settings page.
 display_settings = False
 
-settings_background_rectangle = pygame.Rect(0, 100, 800, 400)
+settings_title_font = pygame.font.Font("Source_Code_Pro/static/SourceCodePro-SemiBold.ttf", 30)
+settings_text_font = pygame.font.Font("Source_Code_Pro/static/SourceCodePro-Regular.ttf", 25)
 
-exit_settings_button_rectangle = pygame.Rect(725, 25, 64, 64)
+settings_title_text = settings_title_font.render("SETTINGS", True, (255, 255, 255))
+settings_title_text_coordinates = settings_title_text.get_rect(center=(400, 150))
+settings_music_text = settings_text_font.render("Music Volume", True, (255, 255, 255))
+settigns_music_text_coordinates = settings_music_text.get_rect(center=(125, 300))
+
+settings_background_rectangle = pygame.Rect(0, 100, 800, 400)
+exit_settings_button_rectangle = pygame.Rect(25, 25, 64, 64)
+
 exit_settings_button = pygame.image.load("Icons_or_Images/cancel.png")
 
 running = True
@@ -106,7 +114,6 @@ while running:
                     print("Level 04 has been selected by the player.")
                 if settings_button_rectangle.collidepoint(mouse_position) and display_levels:
                     display_settings = True
-                    display_levels = False
                     print("Settings Button has been clicked.")
                 if exit_settings_button_rectangle.collidepoint(mouse_position) and display_settings == True:
                     display_settings = False
@@ -149,7 +156,8 @@ while running:
         display_levels = False
         pygame.draw.rect(screen, (0, 0, 0), settings_background_rectangle)
 
-        screen.blit(exit_settings_button, (725, 25))
-        pass
+        screen.blit(exit_settings_button, (25, 25))
+        screen.blit(settings_title_text, settings_title_text_coordinates)
+        screen.blit(settings_music_text, settigns_music_text_coordinates)
 
     pygame.display.update()
