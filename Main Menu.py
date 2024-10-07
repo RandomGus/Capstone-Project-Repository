@@ -87,6 +87,10 @@ volume25_text = volume_text_font.render("25%", True, (255, 255, 255))
 volume25_text_coordinates = volume25_text.get_rect(center=(350, 375))
 volume50_text = volume_text_font.render("50%", True, (255, 255, 255))
 volume50_text_coordinates = volume50_text.get_rect(center=(425, 375))
+volume75_text = volume_text_font.render("75%", True, (255, 255, 255))
+volume75_text_coordinates = volume75_text.get_rect(center=(500, 375))
+volume100_text = volume_text_font.render("100%", True, (255, 255, 255))
+volume100_text_coordinates = volume100_text.get_rect(center=(575, 375))
 
 settings_background_rectangle = pygame.Rect(0, 100, 800, 400)
 exit_settings_button_rectangle = pygame.Rect(25, 25, 64, 64)
@@ -179,5 +183,7 @@ while running:
         screen.blit(volume0_text, volume0_text_coordinates)
         screen.blit(volume25_text, volume25_text_coordinates)
         screen.blit(volume50_text, volume50_text_coordinates)
+        screen.blit(volume75_text, volume75_text_coordinates)
+        screen.blit(volume100_text, volume100_text_coordinates)
 
     pygame.display.update()
