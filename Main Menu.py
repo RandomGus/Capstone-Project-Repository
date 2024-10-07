@@ -67,6 +67,11 @@ def draw_rounded_rect(surface, color, rect, radius=20):
     """Draw a rectangle with rounded corners."""
     pygame.draw.rect(surface, color, rect, border_radius=radius)
 
+# Here we will begin to define the necessary code for the settings page.
+display_settings = False
+
+settings_background_rectangle = pygame.Rect(0, 100, 800, 400)
+
 running = True
 while running:
     screen.fill((0, 0, 0))
@@ -97,6 +102,7 @@ while running:
                 if level4_rectangle.collidepoint(mouse_position) and display_levels:
                     print("Level 04 has been selected by the player.")
                 if settings_button_rectangle.collidepoint(mouse_position) and display_levels:
+                    display_settings = True
                     print("Settings Button has been clicked.")
                 print("The Left Click of the Mouse has been pressed.")
                 print(mouse_position)
@@ -130,5 +136,10 @@ while running:
         screen.blit(level3_text, level3_text_coordinates)
         screen.blit(level4_text, level4_text_coordinates)
         screen.blit(settings_button, (725, 25))
+
+    if display_settings:
+        display_levels = False
+        pygame.draw.rect(screen, (0, 0, 0), settings_background_rectangle)
+        pass
 
     pygame.display.update()
