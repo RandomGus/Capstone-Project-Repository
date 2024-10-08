@@ -49,6 +49,13 @@ def draw_typing_effect(text, position, speed, max_width):
 
 # Messages and dialogue in an array
 messages = [
+    "",
+    "Welcome, Agent, your first assignment has been received. Our client Alice needs to communicate securely with Bob. "
+    "To do that, she sends him a key that they will both use to encrypt and decrypt their messages. Let’s see how this works!",
+
+    "In symmetrical encryption, both Alice and Bob use the same key for encryption and decryption. "
+    "This means that if you know the key, you can encrypt a message to Alice or decrypt a message she sends.",
+
     "AI: Great, you now understand symmetrical encryption!",
     ("AI: Did you notice a problem? If someone intercepts the key while "
      "Alice sends it to Bob, they can decrypt all messages exchanged."),
