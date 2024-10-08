@@ -8,7 +8,7 @@ pygame.init()
 # Screen dimensions
 WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Introduction to Asymmetrical Encryption")
+pygame.display.set_caption("Introduction to Symmetrical Encryption")
 
 # Fonts
 font = pygame.font.Font(None, 36)
