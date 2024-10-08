@@ -11,8 +11,13 @@ pygame.display.set_caption("Introduction to Asymmetrical Encryption")
 font = pygame.font.Font(None, 36)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
+TRANSLUCENT_BG = (255, 255, 255, 180)  # White with slight transparency for the background
 
-# Text rendering function with word wrapping
+# Load background image
+background = pygame.image.load('Background_image/encryption_background.jpeg')
+background = pygame.transform.scale(background, (800, 600))  # Scale to fit the window
+
+# Text rendering function with word wrapping and rounded rectangle background
 def render_text(text, position):
     # Split text into multiple lines if it exceeds the width of the screen
     words = text.split(' ')
@@ -23,13 +28,21 @@ def render_text(text, position):
         # Check if adding the next word would exceed the screen width
         test_line = f"{current_line} {word}".strip()  # Create test line
         text_surface = font.render(test_line, True, BLACK)
-        if text_surface.get_width() <= 750:  # Adjust for margins
+        if text_surface.get_width() <= 700:  # Adjusted for smaller margins (700px instead of 750)
             current_line = test_line
         else:
             lines.append(current_line)  # Add the current line to the list
             current_line = word  # Start a new line with the current word
 
     lines.append(current_line)  # Add the last line
+
+    # Draw a translucent rounded rectangle behind the text for readability
+    text_height = len(lines) * 40
+    rect_x = position[0] - 45  # Move the rectangle a bit to the left (-20)
+    rect_y = position[1] - 10
+    rect_width = 760
+    rect_height = text_height + 20
+    pygame.draw.rect(screen, TRANSLUCENT_BG, (rect_x, rect_y, rect_width, rect_height), border_radius=15)
 
     # Render each line of text
     for i, line in enumerate(lines):
@@ -50,23 +63,23 @@ ai_solution_message = ("AI: Exactly! This is where asymmetrical encryption comes
 # Game loop
 running = True
 while running:
-    screen.fill(WHITE)
+    screen.blit(background, (0, 0))  # Blit the background image
     
     if game_state == "intro":
-        render_text(ai_intro_message, (50, 50))
-        render_text("Press any key to continue...", (50, 500))
+        render_text(ai_intro_message, (70, 50))  # Shift text slightly to the right
+        render_text("Press any key to continue...", (70, 500))
     
     elif game_state == "problem":
-        render_text(ai_problem_message, (50, 50))
-        render_text("Press any key to continue...", (50, 500))
+        render_text(ai_problem_message, (70, 50))
+        render_text("Press any key to continue...", (70, 500))
     
     elif game_state == "response":
-        render_text(player_response_message, (50, 50))
-        render_text("Press any key to continue...", (50, 500))
+        render_text(player_response_message, (70, 50))
+        render_text("Press any key to continue...", (70, 500))
     
     elif game_state == "solution":
-        render_text(ai_solution_message, (50, 50))
-        render_text("Press any key to finish the scene...", (50, 500))
+        render_text(ai_solution_message, (70, 50))
+        render_text("Press any key to finish the scene...", (70, 500))
     
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
