@@ -50,22 +50,29 @@ def draw_typing_effect(text, position, speed, max_width):
 # Messages and dialogue in an array
 messages = [
     "",
-    "Welcome, Agent, your first assignment has been received. Our client Alice needs to communicate securely with Bob. "
+    "AI: Welcome, Agent, your first assignment has been received. Our client Alice needs to communicate securely with Bob. "
     "To do that, she sends him a key that they will both use to encrypt and decrypt their messages. Let’s see how this works!",
 
-    "In symmetrical encryption, both Alice and Bob use the same key for encryption and decryption. "
+    "AI: In symmetrical encryption, both Alice and Bob use the same key for encryption and decryption. "
     "This means that if you know the key, you can encrypt a message to Alice or decrypt a message she sends.",
 
+    "Your first task is to encrypt a message Alice wants to send to Bob. "
+    "Here’s the plaintext message and the binary version, along with the key Alice will use.",
+
+
     "AI: Great, you now understand symmetrical encryption!",
+
     ("AI: Did you notice a problem? If someone intercepts the key while "
      "Alice sends it to Bob, they can decrypt all messages exchanged."),
+
     "Player: Right, the key isn’t fully secure.",
+
     ("AI: Exactly! This is where asymmetrical encryption comes in. "
      "Bob will have two keys: a public key for encryption and a private key for decryption.")
 ]
 
 # Typing speed (in seconds per letter)
-typing_speed = 0.025
+typing_speed = 0.01
 
 # Game state variables
 nextState = False
