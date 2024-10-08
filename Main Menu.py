@@ -94,6 +94,12 @@ volume100_text_coordinates = volume100_text.get_rect(center=(575, 375))
 
 settings_background_rectangle = pygame.Rect(0, 100, 800, 400)
 exit_settings_button_rectangle = pygame.Rect(25, 25, 64, 64)
+# Define rectangles for each volume button
+volume0_rectangle = pygame.Rect(260, 285, 30, 30)  
+volume25_rectangle = pygame.Rect(335, 285, 30, 30)
+volume50_rectangle = pygame.Rect(410, 285, 30, 30)
+volume75_rectangle = pygame.Rect(485, 285, 30, 30)
+volume100_rectangle = pygame.Rect(560, 285, 30, 30)
 
 exit_settings_button = pygame.image.load("Icons_or_Images/cancel.png")
 
@@ -111,14 +117,14 @@ while running:
             running = False
         
         if event.type == pygame.KEYDOWN:
-            print("A Key has been pressed.")
+            # print("A Key has been pressed.")
             if event.key == pygame.K_RETURN:
                 display_main_menu = False
                 display_levels = True
-                print("The Return/Enter Button has been pressed.")
+                # print("The Return/Enter Button has been pressed.")
 
         if event.type == pygame.MOUSEBUTTONDOWN:
-            print("The Mouse has been used.")
+            # print("The Mouse has been used.")
             if pygame.mouse.get_pressed()[0]:
                 if level1_rectangle.collidepoint(mouse_position) and display_levels:
                     print("Level 01 has been selected by the player.")
@@ -130,12 +136,32 @@ while running:
                     print("Level 04 has been selected by the player.")
                 if settings_button_rectangle.collidepoint(mouse_position) and display_levels:
                     display_settings = True
-                    print("Settings Button has been clicked.")
+                    # print("Settings Button has been clicked.")
                 if exit_settings_button_rectangle.collidepoint(mouse_position) and display_settings == True:
                     display_settings = False
                     display_levels = True
-                    print("Exit Settings Button has been clicked.")
-                print("The Left Click of the Mouse has been pressed.")
+                    # print("Exit Settings Button has been clicked.")
+                if volume0_rectangle.collidepoint(mouse_position) and display_settings == True:
+                    current_volume = 0
+                    pygame.mixer.music.set_volume(volume_levels[current_volume])
+                    print("The Volume 0 Button has been clicked.")
+                if volume25_rectangle.collidepoint(mouse_position) and display_settings == True:
+                    current_volume = 1
+                    pygame.mixer.music.set_volume(volume_levels[current_volume])
+                    print("The Volume 25 Button has been clicked.")
+                if volume50_rectangle.collidepoint(mouse_position) and display_settings == True:
+                    current_volume = 2
+                    pygame.mixer.music.set_volume(volume_levels[current_volume])
+                    print("The Volume 50 Button has been clicked.")
+                if volume75_rectangle.collidepoint(mouse_position) and display_settings == True:
+                    current_volume = 3
+                    pygame.mixer.music.set_volume(volume_levels[current_volume])
+                    print("The Volume 75 Button has been clicked.")
+                if volume100_rectangle.collidepoint(mouse_position) and display_settings == True:
+                    current_volume = 4
+                    pygame.mixer.music.set_volume(volume_levels[current_volume])
+                    print("The Volume 100 Button has been clicked.")
+                # print("The Left Click of the Mouse has been pressed.")
                 print(mouse_position)
 
     if display_main_menu:
