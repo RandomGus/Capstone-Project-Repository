@@ -12,10 +12,29 @@ font = pygame.font.Font(None, 36)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
-# Text rendering function
+# Text rendering function with word wrapping
 def render_text(text, position):
-    text_surface = font.render(text, True, BLACK)
-    screen.blit(text_surface, position)
+    # Split text into multiple lines if it exceeds the width of the screen
+    words = text.split(' ')
+    lines = []
+    current_line = ""
+
+    for word in words:
+        # Check if adding the next word would exceed the screen width
+        test_line = f"{current_line} {word}".strip()  # Create test line
+        text_surface = font.render(test_line, True, BLACK)
+        if text_surface.get_width() <= 750:  # Adjust for margins
+            current_line = test_line
+        else:
+            lines.append(current_line)  # Add the current line to the list
+            current_line = word  # Start a new line with the current word
+
+    lines.append(current_line)  # Add the last line
+
+    # Render each line of text
+    for i, line in enumerate(lines):
+        text_surface = font.render(line, True, BLACK)
+        screen.blit(text_surface, (position[0], position[1] + i * 40))  # Adjust y-position for each line
 
 # Game state
 game_state = "intro"
