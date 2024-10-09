@@ -16,7 +16,7 @@ background = pygame.transform.scale(background, (800, 600))
 pygame.mixer.music.load('Daft Punk - Veridis Quo (Official Audio).wav')
 pygame.mixer.music.play(-1)
 volume_levels = [0.00, 0.25, 0.50, 0.75, 1.00]
-current_volume = 3
+current_volume = 2
 pygame.mixer.music.set_volume(volume_levels[current_volume])
 
 pygame.display.set_caption("Cyber Defenders: Rise Through the Ranks")
@@ -102,8 +102,6 @@ volume75_rectangle = pygame.Rect(485, 285, 30, 30)
 volume100_rectangle = pygame.Rect(560, 285, 30, 30)
 
 exit_settings_button = pygame.image.load("Icons_or_Images/cancel.png")
-
-# volume_0_circle = pygame.draw
 
 running = True
 while running:
@@ -197,11 +195,11 @@ while running:
     if display_settings:
         display_levels = False
         pygame.draw.rect(screen, (0, 0, 0), settings_background_rectangle)
-        pygame.draw.circle(screen, (255, 255, 255), (275, 300), 15)
-        pygame.draw.circle(screen, (255, 255, 255), (350, 300), 15)
-        pygame.draw.circle(screen, (255, 255, 255), (425, 300), 15)
-        pygame.draw.circle(screen, (255, 255, 255), (500, 300), 15)
-        pygame.draw.circle(screen, (255, 255, 255), (575, 300), 15)
+        pygame.draw.circle(screen, (139, 0, 0) if current_volume == 0 else (255, 255, 255), (275, 300), 15)
+        pygame.draw.circle(screen, (139, 0, 0) if current_volume == 1 else (255, 255, 255), (350, 300), 15)
+        pygame.draw.circle(screen, (139, 0, 0) if current_volume == 2 else (255, 255, 255), (425, 300), 15)
+        pygame.draw.circle(screen, (139, 0, 0) if current_volume == 3 else (255, 255, 255), (500, 300), 15)
+        pygame.draw.circle(screen, (139, 0, 0) if current_volume == 4 else (255, 255, 255), (575, 300), 15)
 
         screen.blit(exit_settings_button, (25, 25))
         screen.blit(settings_title_text, settings_title_text_coordinates)
