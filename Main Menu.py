@@ -3,6 +3,7 @@
 
 import pygame
 from pygame import mixer
+from Malware_Lesson import Set_Up_Lesson_Screen
 
 pygame.init()
 
@@ -127,6 +128,7 @@ while running:
                 if level1_rectangle.collidepoint(mouse_position) and display_levels:
                     print("Level 01 has been selected by the player.")
                 if level2_rectangle.collidepoint(mouse_position) and display_levels:
+                    Set_Up_Lesson_Screen(screen)
                     print("Level 02 has been selected by the player.")
                 if level3_rectangle.collidepoint(mouse_position) and display_levels:
                     print("Level 03 has been selected by the player.")
