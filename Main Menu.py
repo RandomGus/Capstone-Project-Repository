@@ -116,7 +116,7 @@ while running:
             running = False
         
         if event.type == pygame.KEYDOWN:
-            # print("A Key has been pressed.")
+            print("A Key has been pressed.")
             if event.key == pygame.K_RETURN:
                 display_main_menu = False
                 display_levels = True
@@ -128,8 +128,9 @@ while running:
                 if level1_rectangle.collidepoint(mouse_position) and display_levels:
                     print("Level 01 has been selected by the player.")
                 if level2_rectangle.collidepoint(mouse_position) and display_levels:
+                    pygame.mixer.music.pause()
                     Set_Up_Lesson_Screen(screen)
-                    print("Level 02 has been selected by the player.")
+                    # print("Level 02 has been selected by the player.")
                 if level3_rectangle.collidepoint(mouse_position) and display_levels:
                     print("Level 03 has been selected by the player.")
                 if level4_rectangle.collidepoint(mouse_position) and display_levels:
