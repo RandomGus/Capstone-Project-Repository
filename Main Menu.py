@@ -4,6 +4,7 @@
 import pygame
 from pygame import mixer
 from Malware_Lesson import Set_Up_Lesson_Screen
+from Encryption_Lesson import Set_Up_Ecrypt_Lesson_Screen
 
 pygame.init()
 
@@ -127,6 +128,7 @@ while running:
             if pygame.mouse.get_pressed()[0]:
                 if level1_rectangle.collidepoint(mouse_position) and display_levels:
                     print("Level 01 has been selected by the player.")
+                    Set_Up_Ecrypt_Lesson_Screen(screen)
                 if level2_rectangle.collidepoint(mouse_position) and display_levels:
                     pygame.mixer.music.pause()
                     Set_Up_Lesson_Screen(screen)
