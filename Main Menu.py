@@ -2,6 +2,7 @@
 # This file will serve as the main menu that will be used for the PyGame program.
 
 import pygame
+import sys
 from pygame import mixer
 from Malware_Lesson import Set_Up_Lesson_Screen
 from Encryption_Lesson import Set_Up_Ecrypt_Lesson_Screen
@@ -115,6 +116,7 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+            sys.exit()
         
         if event.type == pygame.KEYDOWN:
             print("A Key has been pressed.")
