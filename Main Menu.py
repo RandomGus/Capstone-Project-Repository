@@ -129,7 +129,7 @@ while running:
             # print("The Mouse has been used.")
             if pygame.mouse.get_pressed()[0]:
                 if level1_rectangle.collidepoint(mouse_position) and display_levels:
-                    print("Level 01 has been selected by the player.")
+                    # print("Level 01 has been selected by the player.")
                     Set_Up_Ecrypt_Lesson_Screen(screen)
                 if level2_rectangle.collidepoint(mouse_position) and display_levels:
                     pygame.mixer.music.pause()
@@ -149,23 +149,23 @@ while running:
                 if volume0_rectangle.collidepoint(mouse_position) and display_settings == True:
                     current_volume = 0
                     pygame.mixer.music.set_volume(volume_levels[current_volume])
-                    print("The Volume 0 Button has been clicked.")
+                    # print("The Volume 0 Button has been clicked.")
                 if volume25_rectangle.collidepoint(mouse_position) and display_settings == True:
                     current_volume = 1
                     pygame.mixer.music.set_volume(volume_levels[current_volume])
-                    print("The Volume 25 Button has been clicked.")
+                    # print("The Volume 25 Button has been clicked.")
                 if volume50_rectangle.collidepoint(mouse_position) and display_settings == True:
                     current_volume = 2
                     pygame.mixer.music.set_volume(volume_levels[current_volume])
-                    print("The Volume 50 Button has been clicked.")
+                    # print("The Volume 50 Button has been clicked.")
                 if volume75_rectangle.collidepoint(mouse_position) and display_settings == True:
                     current_volume = 3
                     pygame.mixer.music.set_volume(volume_levels[current_volume])
-                    print("The Volume 75 Button has been clicked.")
+                    # print("The Volume 75 Button has been clicked.")
                 if volume100_rectangle.collidepoint(mouse_position) and display_settings == True:
                     current_volume = 4
                     pygame.mixer.music.set_volume(volume_levels[current_volume])
-                    print("The Volume 100 Button has been clicked.")
+                    # print("The Volume 100 Button has been clicked.")
                 # print("The Left Click of the Mouse has been pressed.")
                 print(mouse_position)
 
