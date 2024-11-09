@@ -129,8 +129,9 @@ while running:
             # print("The Mouse has been used.")
             if pygame.mouse.get_pressed()[0]:
                 if level1_rectangle.collidepoint(mouse_position) and display_levels:
-                    # print("Level 01 has been selected by the player.")
+                    pygame.mixer.music.pause()
                     Set_Up_Ecrypt_Lesson_Screen(screen)
+                    # print("Level 01 has been selected by the player.")
                 if level2_rectangle.collidepoint(mouse_position) and display_levels:
                     pygame.mixer.music.pause()
                     Set_Up_Lesson_Screen(screen)
