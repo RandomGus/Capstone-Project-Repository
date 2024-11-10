@@ -119,7 +119,7 @@ while running:
             sys.exit()
         
         if event.type == pygame.KEYDOWN:
-            print("A Key has been pressed.")
+            # print("A Key has been pressed.")
             if event.key == pygame.K_RETURN:
                 display_main_menu = False
                 display_levels = True
@@ -168,7 +168,7 @@ while running:
                     pygame.mixer.music.set_volume(volume_levels[current_volume])
                     # print("The Volume 100 Button has been clicked.")
                 # print("The Left Click of the Mouse has been pressed.")
-                print(mouse_position)
+                # print(mouse_position)
 
     if display_main_menu:
         # Draw a larger semi-transparent rectangle behind the title
