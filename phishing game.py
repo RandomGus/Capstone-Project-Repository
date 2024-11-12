@@ -17,7 +17,7 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
 # Load Background Image and Sounds
-background_image = pygame.image.load('Background_Image/phishing_background.jpeg')
+background_image = pygame.image.load('Background_Image/phishing_background2.jpeg')
 pygame.mixer.init()
 pygame.mixer.music.load('Game_Noises/game_music.wav')
 pygame.mixer.music.play(-1)  # Loop background music
@@ -48,6 +48,15 @@ lesson_content = [
     "Lesson 5: Pop-ups claiming you've won a prize are usually fake. Close them without clicking anything inside."
 ]
 current_lesson_index = 0
+
+# Level Prompts
+level_prompts = [
+    ("Level 1: Phishing Detection", "Press 'P' if phishing or 'S' if safe", "Your account is compromised, click here!", 'p', 's', "Phishing emails often use urgency."),
+    ("Level 2: Suspicious Link", "Press 'S' for Suspicious or 'C' for Clean", "www.bank-secure-login.com", 's', 'c', "Check for unusual links or extra words."),
+    ("Level 3: Fake Website", "Press 'F' for Fake or 'T' for Trusted", "www.amazon-secure-payments.net", 'f', 't', "Look for known websites' correct URLs."),
+    ("Level 4: Suspicious Attachment", "Press 'A' to Avoid or 'D' to Download", "invoice.pdf.exe", 'a', 'd', "Double extensions can be suspicious."),
+    ("Level 5: Malicious Pop-Up", "Press 'X' to Close or 'C' to Click", "You won a prize! Click here!", 'x', 'c', "Avoid prize prompts; they are often fake.")
+]
 
 # Helper Function to Display Text with Line Wrapping
 def display_wrapped_text(text, x, y, width, color=WHITE, font_size=24):
@@ -99,21 +108,14 @@ def display_screen():
 
     elif game_state == "level":
         screen.blit(background_image, (0, 0))  # Draw background
-        if current_level == 1 and not level_completed[0]:
-            display_text("Level 1: Phishing Detection", WIDTH // 2, HEIGHT // 2 - 150)
-            display_text("Press 'P' if the email is phishing or 'S' if safe", WIDTH // 2, HEIGHT // 2 - 100)
-            display_text("Email: 'Your account is compromised, click here!'", WIDTH // 2, HEIGHT // 2 - 50)
-        elif current_level == 2 and not level_completed[1]:
-            display_text("Level 2: Suspicious Link", WIDTH // 2, HEIGHT // 2 - 150)
-            display_text("Press 'S' for Suspicious or 'C' for Clean", WIDTH // 2, HEIGHT // 2 - 100)
-            display_text("Link: 'www.bank-secure-login.com'", WIDTH // 2, HEIGHT // 2 - 50)
-        # Add other levels similarly...
+        title, instructions, prompt, correct_key, incorrect_key, feedback_text = level_prompts[current_level - 1]
+        display_text(title, WIDTH // 2, HEIGHT // 2 - 150)
+        display_text(instructions, WIDTH // 2, HEIGHT // 2 - 100)
+        display_text(prompt, WIDTH // 2, HEIGHT // 2 - 50)
 
-        # Display feedback message if timer is active
         if feedback_timer > 0:
             display_text(feedback_message, WIDTH // 2, HEIGHT // 2 + 100, GREEN, 24)
 
-        # If a level is completed, instruct the player to press SPACE
         if level_completed[current_level - 1]:
             display_text("Press SPACE to proceed to the next level", WIDTH // 2, HEIGHT // 2 + 150, BLUE, 24)
 
@@ -161,20 +163,21 @@ while running:
                     player_name += event.unicode
 
         elif game_state == "level":
-            if current_level == 1 and not level_completed[0]:
+            title, instructions, prompt, correct_key, incorrect_key, feedback_text = level_prompts[current_level - 1]
+            
+            if not level_completed[current_level - 1]:
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_p:  # Correct answer
+                    if event.key == getattr(pygame, f"K_{correct_key}"):
                         score += 10
-                        level_completed[0] = True
+                        level_completed[current_level - 1] = True
                         level_complete_sound.play()
-                        feedback_message = "Correct! Phishing emails often use urgency to trick you."
+                        feedback_message = "Correct! " + feedback_text
                         feedback_timer = 2000  # 2 seconds
-                    elif event.key == pygame.K_s:  # Incorrect answer
+                    elif event.key == getattr(pygame, f"K_{incorrect_key}"):
                         lives -= 1
                         life_lost_sound.play()
-                        feedback_message = "Incorrect. Be cautious with urgent emails; they could be phishing."
+                        feedback_message = "Incorrect! " + feedback_text
                         feedback_timer = 2000
-            # Add logic for other levels...
 
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 if level_completed[current_level - 1]:
@@ -192,7 +195,6 @@ while running:
                     game_state = "title"
                 elif event.key == pygame.K_q:  # Quit
                     running = False
-
 
     # Check if the player is out of lives
     if lives <= 0:
