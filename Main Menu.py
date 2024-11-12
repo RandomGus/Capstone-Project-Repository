@@ -6,6 +6,7 @@ import sys
 from pygame import mixer
 from Malware_Lesson import Set_Up_Lesson_Screen
 from Encryption_Lesson import Set_Up_Ecrypt_Lesson_Screen
+from Phishing_Game import Set_Up_Phishing_Lesson_Screen
 
 pygame.init()
 
@@ -137,7 +138,9 @@ while running:
                     Set_Up_Lesson_Screen(screen)
                     # print("Level 02 has been selected by the player.")
                 if level3_rectangle.collidepoint(mouse_position) and display_levels:
-                    print("Level 03 has been selected by the player.")
+                    pygame.mixer.music.pause()
+                    Set_Up_Phishing_Lesson_Screen(screen)
+                    # print("Level 03 has been selected by the player.")
                 if level4_rectangle.collidepoint(mouse_position) and display_levels:
                     print("Level 04 has been selected by the player.")
                 if settings_button_rectangle.collidepoint(mouse_position) and display_levels:
