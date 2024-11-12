@@ -141,7 +141,10 @@ def Set_Up_Ecrypt_Lesson_Screen(screen):
         "Player: Right, the key isn’t fully secure.",
 
         ("AI: Exactly! This is where asymmetrical encryption comes in. "
-        "Bob will have two keys: a public key for encryption and a private key for decryption.")
+        "Bob will have two keys: a public key for encryption and a private key for decryption."),
+        
+        "Bob will share his public key with anyone that wants to send him a message, and keep the private key to himself. "
+        "All messages sent his way is encrypted with his public key, and only him with the private key will be able to decrypt it and read the message."
     ]
 
     # Typing speed (in seconds per letter)
