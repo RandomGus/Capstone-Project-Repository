@@ -6,6 +6,7 @@ import sys
 from pygame import mixer
 from Malware_Lesson import Set_Up_Lesson_Screen
 from Encryption_Lesson import Set_Up_Ecrypt_Lesson_Screen
+from Phishing_Game import Set_Up_Phishing_Lesson_Screen
 
 pygame.init()
 
@@ -69,9 +70,10 @@ level3_rectangle = pygame.Rect(100, 350, 200, 100)
 level4_rectangle = pygame.Rect(500, 350, 200, 100)
 settings_button_rectangle = pygame.Rect(725, 25, 64, 64)
 
-def draw_rounded_rect(surface, color, rect, radius=20):
-    """Draw a rectangle with rounded corners."""
-    pygame.draw.rect(surface, color, rect, border_radius=radius)
+def draw_rect(surface, color, rect):
+    """Draw a rectangle with sharp corners."""
+    pygame.draw.rect(surface, color, rect)
+
 
 # Here we will begin to define the necessary code for the settings page.
 display_settings = False
@@ -137,7 +139,9 @@ while running:
                     Set_Up_Lesson_Screen(screen)
                     # print("Level 02 has been selected by the player.")
                 if level3_rectangle.collidepoint(mouse_position) and display_levels:
-                    print("Level 03 has been selected by the player.")
+                    pygame.mixer.music.pause()
+                    Set_Up_Phishing_Lesson_Screen(screen)
+                    # print("Level 03 has been selected by the player.")
                 if level4_rectangle.collidepoint(mouse_position) and display_levels:
                     print("Level 04 has been selected by the player.")
                 if settings_button_rectangle.collidepoint(mouse_position) and display_levels:
@@ -183,10 +187,10 @@ while running:
 
     if display_levels:
         # Draw level boxes with rounded corners and a background color
-        draw_rounded_rect(screen, (0, 0, 0), level1_rectangle)  # Black background for boxes
-        draw_rounded_rect(screen, (0, 0, 0), level2_rectangle)
-        draw_rounded_rect(screen, (0, 0, 0), level3_rectangle)
-        draw_rounded_rect(screen, (0, 0, 0), level4_rectangle)
+        draw_rect(screen, (0, 0, 0), level1_rectangle)  # Black background for boxes
+        draw_rect(screen, (0, 0, 0), level2_rectangle)
+        draw_rect(screen, (0, 0, 0), level3_rectangle)
+        draw_rect(screen, (0, 0, 0), level4_rectangle)
 
         # Draw a red border around the boxes
         pygame.draw.rect(screen, (139, 0, 0), level1_rectangle, 3)  # Red border
