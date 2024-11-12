@@ -70,9 +70,10 @@ level3_rectangle = pygame.Rect(100, 350, 200, 100)
 level4_rectangle = pygame.Rect(500, 350, 200, 100)
 settings_button_rectangle = pygame.Rect(725, 25, 64, 64)
 
-def draw_rounded_rect(surface, color, rect, radius=20):
-    """Draw a rectangle with rounded corners."""
-    pygame.draw.rect(surface, color, rect, border_radius=radius)
+def draw_rect(surface, color, rect):
+    """Draw a rectangle with sharp corners."""
+    pygame.draw.rect(surface, color, rect)
+
 
 # Here we will begin to define the necessary code for the settings page.
 display_settings = False
@@ -186,10 +187,10 @@ while running:
 
     if display_levels:
         # Draw level boxes with rounded corners and a background color
-        draw_rounded_rect(screen, (0, 0, 0), level1_rectangle)  # Black background for boxes
-        draw_rounded_rect(screen, (0, 0, 0), level2_rectangle)
-        draw_rounded_rect(screen, (0, 0, 0), level3_rectangle)
-        draw_rounded_rect(screen, (0, 0, 0), level4_rectangle)
+        draw_rect(screen, (0, 0, 0), level1_rectangle)  # Black background for boxes
+        draw_rect(screen, (0, 0, 0), level2_rectangle)
+        draw_rect(screen, (0, 0, 0), level3_rectangle)
+        draw_rect(screen, (0, 0, 0), level4_rectangle)
 
         # Draw a red border around the boxes
         pygame.draw.rect(screen, (139, 0, 0), level1_rectangle, 3)  # Red border
