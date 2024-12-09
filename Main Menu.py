@@ -57,9 +57,9 @@ level1_text = level_button_text_font.render("Encryption Module", True, (255, 255
 level1_text_coordinates = level1_text.get_rect(center=(200, 200))
 level2_text = level_button_text_font.render("Malware Module", True, (255, 255, 255))
 level2_text_coordinates = level2_text.get_rect(center=(600, 200))
-level3_text = level_button_text_font.render("Password Module", True, (255, 255, 255))
+level3_text = level_button_text_font.render("Phishing Module", True, (255, 255, 255))
 level3_text_coordinates = level3_text.get_rect(center=(200, 400))
-level4_text = level_button_text_font.render("Phishing Module", True, (255, 255, 255))
+level4_text = level_button_text_font.render("Password Module", True, (255, 255, 255))
 level4_text_coordinates = level4_text.get_rect(center=(600, 400))
 
 settings_button = pygame.image.load("Icons_or_Images/setting.png")
