@@ -50,16 +50,16 @@ below_title_text = below_title_font.render("Press Enter to Continue", True, (255
 below_title_coordinates = below_title_text.get_rect(center=(400, 325))
 
 display_levels = False
-level_button_text_font = pygame.font.Font("Source_Code_Pro/static/SourceCodePro-Regular.ttf", 25)
+level_button_text_font = pygame.font.Font("Source_Code_Pro/static/SourceCodePro-Regular.ttf", 19)
 
 # Define level texts with better font style
-level1_text = level_button_text_font.render("Level 01", True, (255, 255, 255))  # Red text for levels
+level1_text = level_button_text_font.render("Encryption Module", True, (255, 255, 255))  # Red text for levels
 level1_text_coordinates = level1_text.get_rect(center=(200, 200))
-level2_text = level_button_text_font.render("Level 02", True, (255, 255, 255))
+level2_text = level_button_text_font.render("Malware Module", True, (255, 255, 255))
 level2_text_coordinates = level2_text.get_rect(center=(600, 200))
-level3_text = level_button_text_font.render("Level 03", True, (255, 255, 255))
+level3_text = level_button_text_font.render("Password Module", True, (255, 255, 255))
 level3_text_coordinates = level3_text.get_rect(center=(200, 400))
-level4_text = level_button_text_font.render("Level 04", True, (255, 255, 255))
+level4_text = level_button_text_font.render("Phishing Module", True, (255, 255, 255))
 level4_text_coordinates = level4_text.get_rect(center=(600, 400))
 
 settings_button = pygame.image.load("Icons_or_Images/setting.png")
