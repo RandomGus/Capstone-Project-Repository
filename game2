@@ -77,21 +77,25 @@ def display_intro_osint():
 def level_osint(level_number):
     character = generate_character()
     hints = [
-        "Use the first and last name with the year of birth.",
-        "Think of common variations, like initials and birth dates.",
-        "The password could include special characters derived from their details.",
-        "Consider mixing uppercase, lowercase, and numbers.",
+        "Think about combining the year of birth with the first name.",
+        "Try initials with parts of the date of birth.",
+        "Special characters might be used as separators.",
+        "Could a reversed name or date be part of the password?",
+        "Look for patterns in their name and date combinations.",
+        "Mix uppercase, lowercase, and parts of their birth year.",
+        "Think about creative substitutions like replacing letters with numbers.",
+        "What if the password includes their name and a simple suffix?",
     ]
 
     password_logic = [
         lambda c: c["first_name"].lower() + c["dob"][:4],
-        lambda c: c["first_name"].lower() + c["last_name"].upper(),
-        lambda c: c["last_name"].upper() + "@" + c["dob"].replace("-", ""),
-        lambda c: c["dob"].replace("-", "") + c["first_name"].capitalize(),
-        lambda c: c["first_name"][:2] + c["last_name"][-2:] + c["dob"][2:4],
-        lambda c: c["dob"].replace("-", "")[-4:] + c["first_name"].upper(),
-        lambda c: "#" + c["last_name"].capitalize() + c["dob"][:4],
-        lambda c: c["first_name"].lower() + "123" + c["last_name"].upper(),
+        lambda c: c["first_name"][0].upper() + c["last_name"][0].lower() + c["dob"][-2:],
+        lambda c: c["first_name"].capitalize() + "!" + c["dob"].replace("-", ""),
+        lambda c: c["last_name"].lower()[::-1] + c["dob"][:4],
+        lambda c: c["dob"].replace("-", "")[:6] + c["first_name"].lower(),
+        lambda c: c["dob"].replace("-", "")[::-1] + c["last_name"].upper()[:2],
+        lambda c: c["first_name"].capitalize() + "#" + c["dob"][2:4],
+        lambda c: c["first_name"].lower() + "2024" + c["last_name"].capitalize(),
     ]
 
     password = password_logic[level_number - 1](character)
@@ -172,7 +176,7 @@ def display_result(success, correct_password, next_part=False):
             else "Level Complete! Press Enter to continue."
         )
     else:
-        result_text = f"Game Over! Correct password was: {correct_password}"
+        result_text = f"Incorrect! Correct password was: {correct_password}. Press Enter to try again."
 
     result_surf = text_font.render(result_text, True, GREEN if success else RED)
     result_rect = result_surf.get_rect(center=(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2))
@@ -195,6 +199,10 @@ def display_lesson(level_number):
         "Attackers use dictionaries or combinations of characters to guess passwords.",
         "Adding complexity to passwords reduces the success rate of brute force.",
         "Protect against brute force by using account lockouts after failed attempts.",
+        "Consider multi-factor authentication to safeguard against brute force attacks.",
+        "Keep your passwords unique and unrelated to public information.",
+        "Regularly updating passwords reduces the risk of successful brute force.",
+        "Monitor login attempts to detect and mitigate brute force attacks early.",
     ]
 
     screen.fill(WHITE)
@@ -237,12 +245,14 @@ def main_menu():
                     display_intro_osint()
 
                     for i in range(1, 9):
-                        success, correct_password = level_osint(i)
-                        display_result(success, correct_password, next_part=(i < 8))
-                        if success:
-                            display_lesson(i)
-                        if not success:
-                            return
+                        while True:
+                            success, correct_password = level_osint(i)
+                            display_result(success, correct_password, next_part=(i < 8))
+                            if success:
+                                display_lesson(i)
+                                break
+                            else:
+                                display_result(False, correct_password)
 
                 elif exit_button.check_click():
                     pygame.quit()
@@ -250,4 +260,3 @@ def main_menu():
 
 if __name__ == "__main__":
     main_menu()
-
