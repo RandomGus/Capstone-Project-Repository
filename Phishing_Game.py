@@ -15,6 +15,7 @@ GRAY = (200, 200, 200)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
+BLACK = (0, 0, 0)
 
 # Load Background Image
 try:
@@ -28,9 +29,11 @@ except FileNotFoundError:
 exo_font_path = 'fonts/exo2.ttf'
 try:
     exo_font = pygame.font.Font(exo_font_path, 36)  # Custom font
+    small_exo_font = pygame.font.Font(exo_font_path, 24)  # Smaller font for lessons
 except FileNotFoundError:
     print("Font file not found. Falling back to default font.")
     exo_font = pygame.font.Font(None, 36)  # Default font fallback
+    small_exo_font = pygame.font.Font(None, 24)  # Smaller font fallback
 
 # Load Sounds
 pygame.mixer.init()
@@ -39,23 +42,15 @@ pygame.mixer.music.play(-1)  # Loop background music
 level_complete_sound = pygame.mixer.Sound('Game_Noises/level_complete.wav')
 life_lost_sound = pygame.mixer.Sound('Game_Noises/life_lost.wav')
 
-# Define Game State Class
-class GameState:
-    def __init__(self):
-        self.game_state = "menu"  # Possible states: menu, lessons, level
-        self.current_level = 1
-        self.score = 0
-        self.lives = 3
-        self.feedback_message = ""
-        self.feedback_timer = 0
-        self.level_completed = [False] * 5
-
-# Initialize game state
-game_state = GameState()
+# Game Variables
+game_state = "menu"
+current_level = 1
+score = 0
+lives = 3
 
 # Button Rectangles
-lesson_button = pygame.Rect(WIDTH // 2 - 100, HEIGHT // 2 - 50, 200, 50)
-play_button = pygame.Rect(WIDTH // 2 - 100, HEIGHT // 2 + 50, 200, 50)
+lesson_button = pygame.Rect(WIDTH // 2 - 100, HEIGHT // 2 + 90, 200, 65)  # Moved down
+play_button = pygame.Rect(WIDTH // 2 - 100, HEIGHT // 2 + 180, 200, 65)  # Moved down
 
 # Lesson Content
 lesson_content = [
@@ -68,97 +63,90 @@ lesson_content = [
 
 # Level Prompts
 level_prompts = [
-    ("Level 1: Phishing Detection", "Press 'P' if phishing or 'S' if safe", "Your account is compromised, click here!", 'p', 's', "Phishing emails often use urgency."),
-    ("Level 2: Suspicious Link", "Press 'S' for Suspicious or 'C' for Clean", "www.bank-secure-login.com", 's', 'c', "Check for unusual links or extra words."),
-    ("Level 3: Fake Website", "Press 'F' for Fake or 'T' for Trusted", "www.amazon-secure-payments.net", 'f', 't', "Look for known websites' correct URLs."),
-    ("Level 4: Suspicious Attachment", "Press 'A' to Avoid or 'D' to Download", "invoice.pdf.exe", 'a', 'd', "Double extensions can be suspicious."),
-    ("Level 5: Malicious Pop-Up", "Press 'X' to Close or 'C' to Click", "You won a prize! Click here!", 'x', 'c', "Avoid prize prompts; they are often fake.")
+    ("Level 1: Phishing Detection", "Press 'P' if phishing or 'S' if safe", "Your account is compromised, click here!", 'p', 's'),
+    ("Level 2: Suspicious Link", "Press 'S' for Suspicious or 'C' for Clean", "www.bank-secure-login.com", 's', 'c'),
+    ("Level 3: Fake Website", "Press 'F' for Fake or 'T' for Trusted", "www.amazon-secure-payments.net", 'f', 't'),
+    ("Level 4: Suspicious Attachment", "Press 'A' to Avoid or 'D' to Download", "invoice.pdf.exe", 'a', 'd'),
+    ("Level 5: Malicious Pop-Up", "Press 'X' to Close or 'C' to Click", "You won a prize! Click here!", 'x', 'c')
 ]
 
-# Helper Functions
-def draw_button(rect, text, color, hover_color):
-    """Draws a button with hover effects."""
-    mouse_pos = pygame.mouse.get_pos()
-    button_color = hover_color if rect.collidepoint(mouse_pos) else color
-    pygame.draw.rect(screen, button_color, rect)
-    text_surface = exo_font.render(text, True, WHITE)
-    text_rect = text_surface.get_rect(center=(rect.x + rect.width // 2, rect.y + rect.height // 2))
-    screen.blit(text_surface, text_rect)
+# Main Game Loop
+running = True
+clock = pygame.time.Clock()
 
-def display_text(text, x, y, font_size=36, color=WHITE):
-    """Displays centered text on the screen."""
-    font = pygame.font.Font(exo_font_path, font_size)
-    text_surface = font.render(text, True, color)
-    text_rect = text_surface.get_rect(center=(x, y))
-    screen.blit(text_surface, text_rect)
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
 
-def render_screen(screen):
-    """Renders the screen based on the current game state."""
-    screen.blit(background_image, (0, 0))
+        if game_state == "menu":
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if lesson_button.collidepoint(event.pos):
+                    game_state = "lessons"
+                elif play_button.collidepoint(event.pos):
+                    game_state = "level"
 
-    if game_state.game_state == "menu":
-        display_text("Cyber Sleuth: The Threat Within", WIDTH // 2, HEIGHT // 2 - 150, 48, BLUE)
-        draw_button(lesson_button, "Lessons", GRAY, RED)
-        draw_button(play_button, "Play Game", GRAY, RED)
+        elif game_state == "lessons":
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                game_state = "menu"
 
-    elif game_state.game_state == "lessons":
-        display_text("Cybersecurity Lessons", WIDTH // 2, 50, 48, BLUE)
+        elif game_state == "level":
+            if event.type == pygame.KEYDOWN:
+                title, instructions, prompt, correct_key, incorrect_key = level_prompts[current_level - 1]
+                if event.key == getattr(pygame, f"K_{correct_key}"):
+                    score += 10
+                    level_complete_sound.play()
+                    current_level += 1
+                    if current_level > len(level_prompts):
+                        game_state = "menu"
+                elif event.key == getattr(pygame, f"K_{incorrect_key}"):
+                    lives -= 1
+                    life_lost_sound.play()
+                if lives <= 0:
+                    game_state = "menu"
+
+    # Rendering
+    if game_state == "menu":
+        screen.blit(background_image, (0, 0))
+        # Add a semi-transparent rectangle for the title background
+        title_background = pygame.Surface((WIDTH, 100))
+        title_background.set_alpha(180)  # Semi-transparent
+        title_background.fill(BLACK)
+        screen.blit(title_background, (0, HEIGHT // 2 - 200))
+
+        title_surface = exo_font.render("Cyber Sleuth: The Threat Within", True, WHITE)
+        title_rect = title_surface.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 150))
+        screen.blit(title_surface, title_rect)
+
+        pygame.draw.rect(screen, RED, lesson_button)
+        pygame.draw.rect(screen, RED, play_button)
+        lesson_text = exo_font.render("Lessons", True, WHITE)
+        play_text = exo_font.render("Play Game", True, WHITE)
+        screen.blit(lesson_text, lesson_button.move(35, 10))
+        screen.blit(play_text, play_button.move(25, 10))
+
+    elif game_state == "lessons":
+        screen.fill(BLACK)
         for i, lesson in enumerate(lesson_content):
-            display_text(lesson, WIDTH // 2, 150 + i * 50, 24, WHITE)
-        display_text("Press ESC to return to the main menu", WIDTH // 2, HEIGHT - 50, 24, RED)
+            lesson_surface = small_exo_font.render(lesson, True, WHITE)  # Smaller font
+            screen.blit(lesson_surface, (50, 50 + i * 40))  # Adjust spacing
+        return_text = small_exo_font.render("Press ESC to return to menu", True, RED)
+        screen.blit(return_text, (50, HEIGHT - 50))
 
-    elif game_state.game_state == "level":
-        title, instructions, prompt, correct_key, incorrect_key, feedback_text = level_prompts[game_state.current_level - 1]
-        display_text(title, WIDTH // 2, 100, BLUE)
-        display_text(instructions, WIDTH // 2, 150, WHITE)
-        display_text(prompt, WIDTH // 2, 250, RED)
-        display_text(f"Score: {game_state.score}", WIDTH // 2, 400, GREEN)
-        display_text(f"Lives: {game_state.lives}", WIDTH // 2, 450, RED)
-        if game_state.feedback_timer > 0:
-            display_text(game_state.feedback_message, WIDTH // 2, 500, GREEN)
-            game_state.feedback_timer -= 1
+    elif game_state == "level":
+        screen.fill(BLACK)
+        title, instructions, prompt, correct_key, incorrect_key = level_prompts[current_level - 1]
+        title_surface = exo_font.render(title, True, BLUE)
+        instructions_surface = exo_font.render(instructions, True, WHITE)
+        prompt_surface = exo_font.render(prompt, True, RED)
+        screen.blit(title_surface, (50, 50))
+        screen.blit(instructions_surface, (50, 100))
+        screen.blit(prompt_surface, (50, 150))
+        score_surface = exo_font.render(f"Score: {score}", True, GREEN)
+        lives_surface = exo_font.render(f"Lives: {lives}", True, RED)
+        screen.blit(score_surface, (50, 200))
+        screen.blit(lives_surface, (50, 250))
 
-    # Main Game Loop
-    running = True
-    clock = pygame.time.Clock()
-
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-
-            if game_state.game_state == "menu":
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    if lesson_button.collidepoint(event.pos):
-                        game_state.game_state = "lessons"
-                    elif play_button.collidepoint(event.pos):
-                        game_state.game_state = "level"
-
-            elif game_state.game_state == "lessons":
-                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                    game_state.game_state = "menu"
-
-            elif game_state.game_state == "level":
-                title, instructions, prompt, correct_key, incorrect_key, feedback_text = level_prompts[game_state.current_level - 1]
-                if event.type == pygame.KEYDOWN:
-                    if event.key == getattr(pygame, f"K_{correct_key}"):
-                        game_state.score += 10
-                        level_complete_sound.play()
-                        game_state.feedback_message = "Correct! " + feedback_text
-                        game_state.feedback_timer = 100
-                        game_state.level_completed[game_state.current_level - 1] = True
-                        game_state.current_level += 1
-                        if game_state.current_level > len(level_prompts):
-                            game_state.game_state = "menu"
-                    elif event.key == getattr(pygame, f"K_{incorrect_key}"):
-                        game_state.lives -= 1
-                        life_lost_sound.play()
-                        game_state.feedback_message = "Incorrect! " + feedback_text
-                        game_state.feedback_timer = 100
-                    if game_state.lives <= 0:
-                        game_state.game_state = "menu"
-
-        render_screen()
-        pygame.display.flip()
-        clock.tick(30)
+    pygame.display.flip()
+    clock.tick(30)
