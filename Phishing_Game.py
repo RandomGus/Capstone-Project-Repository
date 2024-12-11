@@ -92,7 +92,7 @@ def display_text(text, x, y, font_size=36, color=WHITE):
     text_rect = text_surface.get_rect(center=(x, y))
     screen.blit(text_surface, text_rect)
 
-def render_screen():
+def render_screen(screen):
     """Renders the screen based on the current game state."""
     screen.blit(background_image, (0, 0))
 
