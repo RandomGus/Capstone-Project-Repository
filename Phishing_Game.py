@@ -118,47 +118,47 @@ def render_screen():
             display_text(game_state.feedback_message, WIDTH // 2, 500, GREEN)
             game_state.feedback_timer -= 1
 
-# Main Game Loop
-running = True
-clock = pygame.time.Clock()
+    # Main Game Loop
+    running = True
+    clock = pygame.time.Clock()
 
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
 
-        if game_state.game_state == "menu":
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if lesson_button.collidepoint(event.pos):
-                    game_state.game_state = "lessons"
-                elif play_button.collidepoint(event.pos):
-                    game_state.game_state = "level"
+            if game_state.game_state == "menu":
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if lesson_button.collidepoint(event.pos):
+                        game_state.game_state = "lessons"
+                    elif play_button.collidepoint(event.pos):
+                        game_state.game_state = "level"
 
-        elif game_state.game_state == "lessons":
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                game_state.game_state = "menu"
-
-        elif game_state.game_state == "level":
-            title, instructions, prompt, correct_key, incorrect_key, feedback_text = level_prompts[game_state.current_level - 1]
-            if event.type == pygame.KEYDOWN:
-                if event.key == getattr(pygame, f"K_{correct_key}"):
-                    game_state.score += 10
-                    level_complete_sound.play()
-                    game_state.feedback_message = "Correct! " + feedback_text
-                    game_state.feedback_timer = 100
-                    game_state.level_completed[game_state.current_level - 1] = True
-                    game_state.current_level += 1
-                    if game_state.current_level > len(level_prompts):
-                        game_state.game_state = "menu"
-                elif event.key == getattr(pygame, f"K_{incorrect_key}"):
-                    game_state.lives -= 1
-                    life_lost_sound.play()
-                    game_state.feedback_message = "Incorrect! " + feedback_text
-                    game_state.feedback_timer = 100
-                if game_state.lives <= 0:
+            elif game_state.game_state == "lessons":
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     game_state.game_state = "menu"
 
-    render_screen()
-    pygame.display.flip()
-    clock.tick(30)
+            elif game_state.game_state == "level":
+                title, instructions, prompt, correct_key, incorrect_key, feedback_text = level_prompts[game_state.current_level - 1]
+                if event.type == pygame.KEYDOWN:
+                    if event.key == getattr(pygame, f"K_{correct_key}"):
+                        game_state.score += 10
+                        level_complete_sound.play()
+                        game_state.feedback_message = "Correct! " + feedback_text
+                        game_state.feedback_timer = 100
+                        game_state.level_completed[game_state.current_level - 1] = True
+                        game_state.current_level += 1
+                        if game_state.current_level > len(level_prompts):
+                            game_state.game_state = "menu"
+                    elif event.key == getattr(pygame, f"K_{incorrect_key}"):
+                        game_state.lives -= 1
+                        life_lost_sound.play()
+                        game_state.feedback_message = "Incorrect! " + feedback_text
+                        game_state.feedback_timer = 100
+                    if game_state.lives <= 0:
+                        game_state.game_state = "menu"
+
+        render_screen()
+        pygame.display.flip()
+        clock.tick(30)
