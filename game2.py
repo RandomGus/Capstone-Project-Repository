@@ -269,5 +269,5 @@ def main_menu(screen):
                     sys.exit()
 
 # Run the game
-main_menu(screen)
+# main_menu(screen)
 
