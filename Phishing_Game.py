@@ -72,7 +72,7 @@ level_prompts = [
 ]
 #load level 1 image
 try:
-    level_1_image = pygame.image.load("Icons_or_Images/Level 1 image")
+    level_1_image = pygame.image.load("Icons_or_Images/Level 1 image.png")
     level_1_image = pygame.transform.scale(level_1_image, (400, 300))  # Resize as needed
 except FileNotFoundError:
     print("Level 1 image not found. Please check the path.")
