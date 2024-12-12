@@ -26,14 +26,14 @@ except FileNotFoundError:
     sys.exit()
 
 # Load Fonts
-exo_font_path = 'fonts/exo2.ttf'
+exo_font_path = "fonts/exo2.ttf"
 try:
     exo_font = pygame.font.Font(exo_font_path, 36)  # Custom font
     small_exo_font = pygame.font.Font(exo_font_path, 24)  # Smaller font for lessons
 except FileNotFoundError:
     print("Font file not found. Falling back to default font.")
-    exo_font = pygame.font.Font(None, 36)  # Default font fallback
-    small_exo_font = pygame.font.Font(None, 24)  # Smaller font fallback
+    # exo_font = pygame.font.Font(None, 36)  # Default font fallback
+    # small_exo_font = pygame.font.Font(None, 24)  # Smaller font fallback
 
 # Load Sounds
 pygame.mixer.init()
@@ -72,6 +72,8 @@ level_prompts = [
 ]
 
 def render_screen(screen):
+    global game_state, current_level, score, lives
+
     # Main Game Loop
     running = True
     clock = pygame.time.Clock()
