@@ -89,7 +89,7 @@ except FileNotFoundError:
 # Load Level 3 Image
 try:
     level_3_image = pygame.image.load("Icons_or_Images/level3.png")
-    level_3_image = pygame.transform.scale(level_3_image, (400, 300))  # Resize as needed
+    level_3_image = pygame.transform.scale(level_3_image, (600, 300))  # Resize as needed
 except FileNotFoundError:
     print("Level 3 image not found. Please check the path.")
     sys.exit()
@@ -97,7 +97,7 @@ except FileNotFoundError:
 # Load Level 4 Image
 try:
     level_4_image = pygame.image.load("Icons_or_Images/level4.png")
-    level_4_image = pygame.transform.scale(level_4_image, (400, 300))  # Resize as needed
+    level_4_image = pygame.transform.scale(level_4_image, (600, 300))  # Resize as needed
 except FileNotFoundError:
     print("Level 4 image not found. Please check the path.")
     sys.exit()
@@ -205,13 +205,13 @@ def render_screen(screen):
 
         # Display Popup Image for Level 3
             if current_level == 3:
-                popup_rect = pygame.Rect(WIDTH // 2 - 200, HEIGHT // 2 - 150, 400, 300)
+                popup_rect = pygame.Rect(WIDTH // 2 - 200, HEIGHT // 2 - 150, 600, 300)
                 pygame.draw.rect(screen, WHITE, popup_rect)  # Add a border
                 screen.blit(level_3_image, popup_rect.topleft)
 
         # Display Popup Image for Level 4
             if current_level == 4:
-                popup_rect = pygame.Rect(WIDTH // 2 - 200, HEIGHT // 2 - 150, 400, 300)
+                popup_rect = pygame.Rect(WIDTH // 2 - 200, HEIGHT // 2 - 150, 600, 300)
                 pygame.draw.rect(screen, WHITE, popup_rect)  # Add a border
                 screen.blit(level_4_image, popup_rect.topleft)
 
