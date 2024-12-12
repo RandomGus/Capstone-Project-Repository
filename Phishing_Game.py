@@ -88,7 +88,7 @@ except FileNotFoundError:
 
 # Load Level 3 Image
 try:
-    level_3_image = pygame.image.load("Icons_or_Images/level3.png")
+    level_3_image = pygame.image.load("Icons_or_Images/level-3.png")
     level_3_image = pygame.transform.scale(level_3_image, (500, 300))  # Resize as needed
 except FileNotFoundError:
     print("Level 3 image not found. Please check the path.")
@@ -96,7 +96,7 @@ except FileNotFoundError:
 
 # Load Level 4 Image
 try:
-    level_4_image = pygame.image.load("Icons_or_Images/level4.png")
+    level_4_image = pygame.image.load("Icons_or_Images/level-4.png")
     level_4_image = pygame.transform.scale(level_4_image, (500, 300))  # Resize as needed
 except FileNotFoundError:
     print("Level 4 image not found. Please check the path.")
