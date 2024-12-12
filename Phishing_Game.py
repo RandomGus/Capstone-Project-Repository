@@ -64,7 +64,7 @@ lesson_content = [
 
 # Level Prompts
 level_prompts = [
-    ("Level 1: Phishing Detection", "Press 'P' if phishing or 'S' if safe", "Your account is compromised, click here!", 'p', 's'),
+    ("Level 1: Phishing Detection", "Press 'P' if phishing or 'S' if safe",'Easy', 'p', 's'),
     ("Level 2: Suspicious Link", "Press 'S' for Suspicious or 'C' for Clean", "www.bank-secure-login.com", 's', 'c'),
     ("Level 3: Fake Website", "Press 'F' for Fake or 'T' for Trusted", "www.amazon-secure-payments.net", 'f', 't'),
     ("Level 4: Suspicious Attachment", "Press 'A' to Avoid or 'D' to Download", "invoice.pdf.exe", 'a', 'd'),
