@@ -65,17 +65,25 @@ lesson_content = [
 # Level Prompts
 level_prompts = [
     ("Level 1: Phishing Detection", "Press 'P' if phishing or 'S' if safe",'Easy', 'p', 's'),
-    ("Level 2: Suspicious Link", "Press 'S' for Suspicious or 'C' for Clean", "www.bank-secure-login.com", 's', 'c'),
-    ("Level 3: Fake Website", "Press 'F' for Fake or 'T' for Trusted", "www.amazon-secure-payments.net", 'f', 't'),
-    ("Level 4: Suspicious Attachment", "Press 'A' to Avoid or 'D' to Download", "invoice.pdf.exe", 'a', 'd'),
-    ("Level 5: Malicious Pop-Up", "Press 'X' to Close or 'C' to Click", "You won a prize! Click here!", 'x', 'c')
+    ("Level 2: Suspicious Link", "Press 'S' for Suspicious or 'C' for Clean", "Easy", 's', 'c'),
+    ("Level 3: Fake Website", "Press 'F' for Fake or 'T' for Trusted", "Medium", 'f', 't'),
+    ("Level 4: Suspicious Attachment", "Press 'A' to Avoid or 'D' to Download", "Hard", 'a', 'd'),
+    ("Level 5: Malicious Pop-Up", "Press 'X' to Close or 'C' to Click", "Hardest", 'x', 'c')
 ]
-#load level 1 image
+#Load Level 1 Image
 try:
     level_1_image = pygame.image.load("Icons_or_Images/Level 1 image.png")
     level_1_image = pygame.transform.scale(level_1_image, (400, 300))  # Resize as needed
 except FileNotFoundError:
     print("Level 1 image not found. Please check the path.")
+    sys.exit()
+
+# Load Level 2 Image
+try:
+    level_2_image = pygame.image.load("Icons_or_Images/phishingemail.png")
+    level_2_image = pygame.transform.scale(level_2_image, (400, 300))  # Resize as needed
+except FileNotFoundError:
+    print("Level 2 image not found. Please check the path.")
     sys.exit()
 
 def render_screen(screen):
@@ -164,6 +172,14 @@ def render_screen(screen):
                 popup_rect = pygame.Rect(WIDTH // 2 - 200, HEIGHT // 2 - 150, 400, 300)
                 pygame.draw.rect(screen, WHITE, popup_rect)  # Add a border
                 screen.blit(level_1_image, popup_rect.topleft)
+        
+        # Display Popup Image for Level 2
+            if current_level == 2:
+                popup_rect = pygame.Rect(WIDTH // 2 - 200, HEIGHT // 2 - 150, 400, 300)
+                pygame.draw.rect(screen, WHITE, popup_rect)  # Add a border
+                screen.blit(level_2_image, popup_rect.topleft)
+        
+        
          
         pygame.display.flip()
         clock.tick(30)
