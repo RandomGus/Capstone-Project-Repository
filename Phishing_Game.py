@@ -73,14 +73,14 @@ level_prompts = [
 #Load Level 1 Image
 try:
     level_1_image = pygame.image.load("Icons_or_Images/Level 1 image.png")
-    level_1_image = pygame.transform.scale(level_1_image, (500, 300))  # Resize as needed
+    level_1_image = pygame.transform.scale(level_1_image, (400, 300))  # Resize as needed
 except FileNotFoundError:
     print("Level 1 image not found. Please check the path.")
     sys.exit()
 
 # Load Level 2 Image
 try:
-    level_2_image = pygame.image.load("Icons_or_Images/phishingemail.png")
+    level_2_image = pygame.image.load("Icons_or_Images/level-2.gif")
     level_2_image = pygame.transform.scale(level_2_image, (500, 300))  # Resize as needed
 except FileNotFoundError:
     print("Level 2 image not found. Please check the path.")
@@ -193,7 +193,7 @@ def render_screen(screen):
         
         # Display Popup Image for Level 1
             if current_level == 1:
-                popup_rect = pygame.Rect(WIDTH // 2 - 200, HEIGHT // 2 - 150, 500, 300)
+                popup_rect = pygame.Rect(WIDTH // 2 - 200, HEIGHT // 2 - 150, 400, 300)
                 pygame.draw.rect(screen, WHITE, popup_rect)  # Add a border
                 screen.blit(level_1_image, popup_rect.topleft)
         
