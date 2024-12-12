@@ -118,16 +118,16 @@ def render_screen(screen):
             title_background.fill(BLACK)
             screen.blit(title_background, (0, HEIGHT // 2 - 200))
 
-            title_surface = exo_font.render("Cyber Sleuth: The Threat Within", True, WHITE)
+            title_surface = exo_font.render("CYBER SLUETH: THE THREAT WITHIN", True, WHITE)
             title_rect = title_surface.get_rect(center=(WIDTH // 2, HEIGHT // 2 - 150))
             screen.blit(title_surface, title_rect)
 
-            pygame.draw.rect(screen, RED, lesson_button)
-            pygame.draw.rect(screen, RED, play_button)
+            pygame.draw.rect(screen, (139, 0, 0), lesson_button)
+            pygame.draw.rect(screen, (139, 0, 0), play_button)
             lesson_text = exo_font.render("Lessons", True, WHITE)
             play_text = exo_font.render("Play Game", True, WHITE)
-            screen.blit(lesson_text, lesson_button.move(35, 10))
-            screen.blit(play_text, play_button.move(25, 10))
+            screen.blit(lesson_text, lesson_button.move(30, 15))
+            screen.blit(play_text, play_button.move(20, 15))
 
         elif game_state == "lessons":
             screen.fill(BLACK)
