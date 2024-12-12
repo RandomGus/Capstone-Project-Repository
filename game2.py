@@ -110,6 +110,9 @@ def level_osint(level_number):
     hint_text = hints[level_number - 1]
     show_hint = False
 
+    attempts = 0
+    max_attempts = 3
+
     while True:
         seconds = (pygame.time.get_ticks() - start_ticks) / 1000
         remaining_time = max(timer - seconds, 0)
@@ -138,6 +141,10 @@ def level_osint(level_number):
         timer_rect = timer_surf.get_rect(center=(SCREEN_WIDTH / 2, 500))
         screen.blit(timer_surf, timer_rect)
 
+        attempts_text = text_font.render(f"Attempts Left: {max_attempts - attempts}", True, WHITE)
+        attempts_rect = attempts_text.get_rect(center=(SCREEN_WIDTH / 2, 550))
+        screen.blit(attempts_text, attempts_rect)
+
         if show_hint:
             pygame.draw.rect(screen, WHITE, hint_box)
             hint_surf = hint_font.render(hint_text, True, BLACK)
@@ -156,7 +163,10 @@ def level_osint(level_number):
                     if input_password == password:
                         return True, password
                     else:
-                        return False, password
+                        attempts += 1
+                        input_password = ""
+                        if attempts >= max_attempts:
+                            return False, password
                 else:
                     input_password += event.unicode
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -222,6 +232,7 @@ def display_lesson(level_number):
 
 # Main menu
 def main_menu(screen):
+    game_started = False
     while True:
         screen.fill(WHITE)
         title_surf = title_font.render("Inside the Vault", True, BLACK)
@@ -241,22 +252,22 @@ def main_menu(screen):
                 pygame.quit()
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if osint_button.check_click():
+                if osint_button.check_click() and not game_started:
+                    game_started = True
                     display_intro_osint()
 
                     for i in range(1, 9):
-                        while True:
-                            success, correct_password = level_osint(i)
-                            display_result(success, correct_password, next_part=(i < 8))
-                            if success:
-                                display_lesson(i)
-                                break
-                            else:
-                                display_result(False, correct_password)
+                        success, correct_password = level_osint(i)
+                        display_result(success, correct_password, next_part=(i < 8))
+                        if success:
+                            display_lesson(i)
+                        else:
+                            display_result(False, correct_password)
 
                 elif exit_button.check_click():
                     pygame.quit()
                     sys.exit()
 
-# if __name__ == "__main__":
-#     main_menu()
+# Run the game
+main_menu(screen)
+
