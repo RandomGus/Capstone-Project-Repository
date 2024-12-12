@@ -70,6 +70,13 @@ level_prompts = [
     ("Level 4: Suspicious Attachment", "Press 'A' to Avoid or 'D' to Download", "invoice.pdf.exe", 'a', 'd'),
     ("Level 5: Malicious Pop-Up", "Press 'X' to Close or 'C' to Click", "You won a prize! Click here!", 'x', 'c')
 ]
+#load level 1 image
+try:
+    level_1_image = pygame.image.load("Icons_or_Images/Level 1 image")
+    level_1_image = pygame.transform.scale(level_1_image, (400, 300))  # Resize as needed
+except FileNotFoundError:
+    print("Level 1 image not found. Please check the path.")
+    sys.exit()
 
 def render_screen(screen):
     global game_state, current_level, score, lives
@@ -151,6 +158,12 @@ def render_screen(screen):
             lives_surface = exo_font.render(f"Lives: {lives}", True, RED)
             screen.blit(score_surface, (50, 200))
             screen.blit(lives_surface, (50, 250))
-
+        
+        # Display Popup Image for Level 1
+            if current_level == 1:
+                popup_rect = pygame.Rect(WIDTH // 2 - 200, HEIGHT // 2 - 150, 400, 300)
+                pygame.draw.rect(screen, WHITE, popup_rect)  # Add a border
+                screen.blit(level_1_image, popup_rect.topleft)
+         
         pygame.display.flip()
         clock.tick(30)
