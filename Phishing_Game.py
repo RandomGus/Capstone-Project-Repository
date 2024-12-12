@@ -73,7 +73,7 @@ level_prompts = [
 #Load Level 1 Image
 try:
     level_1_image = pygame.image.load("Icons_or_Images/Level 1 image.png")
-    level_1_image = pygame.transform.scale(level_1_image, (400, 300))  # Resize as needed
+    level_1_image = pygame.transform.scale(level_1_image, (500, 300))  # Resize as needed
 except FileNotFoundError:
     print("Level 1 image not found. Please check the path.")
     sys.exit()
@@ -81,7 +81,7 @@ except FileNotFoundError:
 # Load Level 2 Image
 try:
     level_2_image = pygame.image.load("Icons_or_Images/phishingemail.png")
-    level_2_image = pygame.transform.scale(level_2_image, (400, 300))  # Resize as needed
+    level_2_image = pygame.transform.scale(level_2_image, (500, 300))  # Resize as needed
 except FileNotFoundError:
     print("Level 2 image not found. Please check the path.")
     sys.exit()
@@ -89,7 +89,7 @@ except FileNotFoundError:
 # Load Level 3 Image
 try:
     level_3_image = pygame.image.load("Icons_or_Images/level3.png")
-    level_3_image = pygame.transform.scale(level_3_image, (600, 300))  # Resize as needed
+    level_3_image = pygame.transform.scale(level_3_image, (500, 300))  # Resize as needed
 except FileNotFoundError:
     print("Level 3 image not found. Please check the path.")
     sys.exit()
@@ -97,7 +97,7 @@ except FileNotFoundError:
 # Load Level 4 Image
 try:
     level_4_image = pygame.image.load("Icons_or_Images/level4.png")
-    level_4_image = pygame.transform.scale(level_4_image, (600, 300))  # Resize as needed
+    level_4_image = pygame.transform.scale(level_4_image, (500, 300))  # Resize as needed
 except FileNotFoundError:
     print("Level 4 image not found. Please check the path.")
     sys.exit()
@@ -105,7 +105,7 @@ except FileNotFoundError:
 # Load Level 5 Image
 try:
     level_5_image = pygame.image.load("Icons_or_Images/level5.jpg")
-    level_5_image = pygame.transform.scale(level_5_image, (400, 300))  # Resize as needed
+    level_5_image = pygame.transform.scale(level_5_image, (500, 300))  # Resize as needed
 except FileNotFoundError:
     print("Level 5 image not found. Please check the path.")
     sys.exit()
@@ -193,31 +193,31 @@ def render_screen(screen):
         
         # Display Popup Image for Level 1
             if current_level == 1:
-                popup_rect = pygame.Rect(WIDTH // 2 - 200, HEIGHT // 2 - 150, 400, 300)
+                popup_rect = pygame.Rect(WIDTH // 2 - 200, HEIGHT // 2 - 150, 500, 300)
                 pygame.draw.rect(screen, WHITE, popup_rect)  # Add a border
                 screen.blit(level_1_image, popup_rect.topleft)
         
         # Display Popup Image for Level 2
             if current_level == 2:
-                popup_rect = pygame.Rect(WIDTH // 2 - 200, HEIGHT // 2 - 150, 400, 300)
+                popup_rect = pygame.Rect(WIDTH // 2 - 200, HEIGHT // 2 - 150, 500, 300)
                 pygame.draw.rect(screen, WHITE, popup_rect)  # Add a border
                 screen.blit(level_2_image, popup_rect.topleft)
 
         # Display Popup Image for Level 3
             if current_level == 3:
-                popup_rect = pygame.Rect(WIDTH // 2 - 200, HEIGHT // 2 - 150, 600, 300)
+                popup_rect = pygame.Rect(WIDTH // 2 - 200, HEIGHT // 2 - 150, 500, 300)
                 pygame.draw.rect(screen, WHITE, popup_rect)  # Add a border
                 screen.blit(level_3_image, popup_rect.topleft)
 
         # Display Popup Image for Level 4
             if current_level == 4:
-                popup_rect = pygame.Rect(WIDTH // 2 - 200, HEIGHT // 2 - 150, 600, 300)
+                popup_rect = pygame.Rect(WIDTH // 2 - 200, HEIGHT // 2 - 150, 500, 300)
                 pygame.draw.rect(screen, WHITE, popup_rect)  # Add a border
                 screen.blit(level_4_image, popup_rect.topleft)
 
         # Display Popup Image for Level 5
             if current_level == 5:
-                popup_rect = pygame.Rect(WIDTH // 2 - 200, HEIGHT // 2 - 150, 400, 300)
+                popup_rect = pygame.Rect(WIDTH // 2 - 200, HEIGHT // 2 - 150, 500, 300)
                 pygame.draw.rect(screen, WHITE, popup_rect)  # Add a border
                 screen.blit(level_5_image, popup_rect.topleft)
 
