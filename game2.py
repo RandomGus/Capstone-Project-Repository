@@ -221,7 +221,7 @@ def display_lesson(level_number):
                 return
 
 # Main menu
-def main_menu():
+def main_menu(screen):
     while True:
         screen.fill(WHITE)
         title_surf = title_font.render("Inside the Vault", True, BLACK)
@@ -258,5 +258,5 @@ def main_menu():
                     pygame.quit()
                     sys.exit()
 
-if __name__ == "__main__":
-    main_menu()
+# if __name__ == "__main__":
+#     main_menu()

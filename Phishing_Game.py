@@ -54,12 +54,13 @@ play_button = pygame.Rect(WIDTH // 2 - 100, HEIGHT // 2 + 180, 200, 65)  # Moved
 
 # Lesson Content
 lesson_content = [
-    "Lesson 1: Phishing emails often create urgency to trick you.",
-    "Lesson 2: Suspicious links may mimic real URLs but have small changes.",
-    "Lesson 3: Fake websites often lack HTTPS or use strange domains.",
-    "Lesson 4: Attachments with double extensions like .exe are risky.",
-    "Lesson 5: Pop-ups claiming prizes are usually scams."
+    "LESSON 1: Phishing emails often create a sense of urgency", "to trick you into clicking malicious links or downloading attachments. ",
+    "LESSON 2: Suspicious links may mimic real URLs but have small",  "changes in the domain name or spelling.",
+    "LESSON 3: A website designed to trick users into revealing", "personal information or downloading malware.",
+    "LESSON 4: A malicious email attachment disguised as a", "legitimate file to infect a user's computer with malware.",
+    "LESSON 5: An intrusive online advertisement that redirects", "users to harmful websites or installs malware on their devices."
 ]
+
 
 # Level Prompts
 level_prompts = [
